@@ -1,0 +1,222 @@
+The content has been copied to your clipboard. Please paste it here to complete the file creation.{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "Introduce the rag-practice repository:It is basic flow of what is rag and how it works. a learning-oriented Retrieval-Augmented Generation pipeline over Indian finance lecture transcripts using sentence-transformers, ChromaDB and a local Ollama model. Summarize repo layout (src/, data/documents/transcripts/, chroma_db/, .opencode/) and link to child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Getting Started & Environment",
+      "purpose": "Setup instructions: Python venv, requirements.txt dependencies (chromadb, sentence-transformers, ollama), pulling the qwen2.5:7b model, .env/.gitignore conventions, and running src/main.py.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "End-to-End RAG Pipeline Flow",
+      "purpose": "Trace a question from src/main.py through create_collection -> retrive -> build_context -> generate_answer, and the offline indexing path loader -> chunker -> embedder -> store_chunks.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Indexing Pipeline (src/)",
+      "purpose": "Overview of the ingestion side of the pipeline — document loading, chunking, embedding — linking to child pages for each stage.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Document Loading (loader.py)",
+      "purpose": "How load_document() resolves PROJECT_ROOT and reads a single hardcoded transcript file; limitations and the planned multi-document discovery.",
+      "parent": "Indexing Pipeline (src/)",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Chunking Strategy (chunker.py)",
+      "purpose": "Word-based sliding-window chunking: chunk_size=200, overlap=50, step_size computation, chunk list structure and trade-offs.",
+      "parent": "Indexing Pipeline (src/)",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Embedding Generation (embedder.py)",
+      "purpose": "SentenceTransformer all-MiniLM-L6-v2 model loading, batch encoding of joined chunk tokens, embedding shape/dimensionality, and module-level side effects.",
+      "parent": "Indexing Pipeline (src/)",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Vector Store & Retrieval",
+      "purpose": "Overview of persistence and similarity search: the finance_documents ChromaDB collection and the query path. Links to children.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "ChromaDB Collection Management (vector_store.py)",
+      "purpose": "PersistentClient at ./chroma_db, get_or_create_collection('finance_documents'), store_chunks ID/metadata scheme (chunk_i, source filename), get_data inspection helper and duplicate-ID pitfalls.",
+      "parent": "Vector Store & Retrieval",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Retrieval & Context Building (retriver.py)",
+      "purpose": "embed_query, collection.query with n_results=2, build_context joining documents, and the test() debug helper printing distances/ids.",
+      "parent": "Vector Store & Retrieval",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "On-Disk Persistence Layout (chroma_db/)",
+      "purpose": "Explain the committed ChromaDB artifacts: chroma.sqlite3 metadata tables and the HNSW segment directory files (header.bin, length.bin, link_lists.bin, data_level0.bin).",
+      "parent": "Vector Store & Retrieval",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Answer Generation with Ollama",
+      "purpose": "Overview of the generation stage: local LLM serving, prompt design, and smoke testing.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Prompt Design & generate_answer()",
+      "purpose": "The system prompt's grounding rules (answer only from context, preserve numbers, admit ignorance), user message format, and qwen2.5:7b model choice.",
+      "parent": "Answer Generation with Ollama",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Ollama Connectivity Testing",
+      "purpose": "src/test_ollama.py as a minimal check that the local Ollama daemon and model are reachable; troubleshooting tips.",
+      "parent": "Answer Generation with Ollama",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Knowledge Corpus: Finance Transcripts",
+      "purpose": "Overview of the data/documents/transcripts corpus (25+ lecture transcripts plus topic_map.md) used as RAG source material; links to thematic child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Corpus Inventory & Topic Map",
+      "purpose": "File naming conventions, the topic_map.md index, duplicates (e.g. 'copy' files), and how transcripts map to topics.",
+      "parent": "Knowledge Corpus: Finance Transcripts",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Market Mechanics Transcripts",
+      "purpose": "Content summary of transcripts covering exchanges, order books, order types, demat accounts, block deals (notably recording 10) and related early recordings.",
+      "parent": "Knowledge Corpus: Finance Transcripts",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Valuation, Ratios & Technical Analysis Transcripts",
+      "purpose": "Content summary of transcripts on EPS, P/E, book value, screener.in workflows, 200-day moving average and trading strategy (recordings 11-25).",
+      "parent": "Knowledge Corpus: Finance Transcripts",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Tooling & Roadmap",
+      "purpose": "Overview of repo tooling and planned work, linking to the .opencode command spec and dependency/VCS conventions.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "index-documents Command Specification",
+      "purpose": "The .opencode/command/index-documents.md spec: multi-document indexing, globally unique chunk IDs, duplicate prevention, incremental updates, and required tests.",
+      "parent": "Tooling & Roadmap",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Dependencies & Repository Hygiene",
+      "purpose": "requirements.txt pinning and .gitignore exclusions (.venv, __pycache__, .env, .DS_Store); note that chroma_db artifacts are currently tracked.",
+      "parent": "Tooling & Roadmap",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Define RAG, chunking, overlap, embedding, all-MiniLM-L6-v2, HNSW, segment, collection, PersistentClient, finance_documents, Ollama, qwen2.5:7b, context window, grounding, plus finance terms from the corpus (demat, block deal, EPS, P/E, book value, promoter holding, moving average, NSE/BSE) with code pointers.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
